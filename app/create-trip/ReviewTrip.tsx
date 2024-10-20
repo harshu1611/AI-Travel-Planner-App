@@ -1,26 +1,28 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { CreateTripContext } from "@/context/CreateTripContext";
 import moment from "moment";
+import { normalize } from "@/utils/Responsive";
 export default function ReviewTrip() {
   const tripContext = useContext(CreateTripContext);
   const { tripData, setTripData } = tripContext;
   return (
     <SafeAreaView
-      style={{ backgroundColor: "white", height: "100%", padding: 25 }}
+      style={{ backgroundColor: "white", padding: 25}}
     >
       <TouchableOpacity onPress={() => router.back()}>
         <Ionicons name="arrow-back" color={"black"} size={30} />
       </TouchableOpacity>
-      <Text style={{ fontFamily: "outfit-bold", fontSize: 36, marginTop: 25 }}>
+      <Text style={{ fontFamily: "outfit-bold", fontSize: normalize(36), marginTop: 25 }}>
         Review your trip
       </Text>
-      <Text style={{ fontFamily: "outfit-bold", fontSize: 22, marginTop: 25 }}>
+      <Text style={{ fontFamily: "outfit-bold", fontSize: normalize(22), marginTop: 25 }}>
         Please review your selection before generating your trip
       </Text>
+      <ScrollView style={{overflow:'scroll',height:'100%'}}>
       <View
         style={{
           paddingVertical: 20,
@@ -31,7 +33,7 @@ export default function ReviewTrip() {
           height: "auto",
         }}
       >
-        <Text style={{ fontSize: 32 }}>📍</Text>
+        <Text style={{ fontSize: normalize(32) }}>📍</Text>
         <View
           style={{
             display: "flex",
@@ -41,7 +43,7 @@ export default function ReviewTrip() {
           }}
         >
           <Text
-            style={{ fontFamily: "outfit", color: "#808080", fontSize: 20 }}
+            style={{ fontFamily: "outfit", color: "#808080", fontSize: normalize(20) }}
           >
             Destination
           </Text>
@@ -50,7 +52,7 @@ export default function ReviewTrip() {
               style={{
                 fontFamily: "outfit-bold",
                 color: "black",
-                fontSize: 20,
+                fontSize: normalize(20),
               }}
             >
               {tripData.destinationInfo.name}
@@ -67,7 +69,7 @@ export default function ReviewTrip() {
           height: "auto",
         }}
       >
-        <Text style={{ fontSize: 32 }}>📆</Text>
+        <Text style={{ fontSize: normalize(32) }}>📆</Text>
         <View
           style={{
             display: "flex",
@@ -77,12 +79,12 @@ export default function ReviewTrip() {
           }}
         >
           <Text
-            style={{ fontFamily: "outfit", color: "#808080", fontSize: 20 }}
+            style={{ fontFamily: "outfit", color: "#808080", fontSize: normalize(20) }}
           >
             Travel Date
           </Text>
           <Text
-            style={{ fontFamily: "outfit-bold", color: "black", fontSize: 20 }}
+            style={{ fontFamily: "outfit-bold", color: "black", fontSize: normalize(20) }}
           >
             {moment(tripData.startDate).format("DD MMM") +
               " To " +
@@ -99,7 +101,7 @@ export default function ReviewTrip() {
           height: "auto",
         }}
       >
-        <Text style={{ fontSize: 32 }}>🚌</Text>
+        <Text style={{ fontSize: normalize(32) }}>🚌</Text>
         <View
           style={{
             display: "flex",
@@ -109,12 +111,12 @@ export default function ReviewTrip() {
           }}
         >
           <Text
-            style={{ fontFamily: "outfit", color: "#808080", fontSize: 20 }}
+            style={{ fontFamily: "outfit", color: "#808080", fontSize: normalize(20) }}
           >
             Travellers
           </Text>
           <Text
-            style={{ fontFamily: "outfit-bold", color: "black", fontSize: 20 }}
+            style={{ fontFamily: "outfit-bold", color: "black", fontSize: normalize(20) }}
           >
             {tripData.travellerInfo.title}
           </Text>
@@ -129,7 +131,7 @@ export default function ReviewTrip() {
           height: "auto",
         }}
       >
-        <Text style={{ fontSize: 32 }}>💰</Text>
+        <Text style={{ fontSize: normalize(32) }}>💰</Text>
         <View
           style={{
             display: "flex",
@@ -139,12 +141,12 @@ export default function ReviewTrip() {
           }}
         >
           <Text
-            style={{ fontFamily: "outfit", color: "#808080", fontSize: 20 }}
+            style={{ fontFamily: "outfit", color: "#808080", fontSize: normalize(20) }}
           >
             Budget
           </Text>
           <Text
-            style={{ fontFamily: "outfit-bold", color: "black", fontSize: 20 }}
+            style={{ fontFamily: "outfit-bold", color: "black", fontSize: normalize(20) }}
           >
             {tripData.budget}
           </Text>
@@ -168,11 +170,13 @@ export default function ReviewTrip() {
         }}
       >
         <Text
-          style={{ color: "white", fontFamily: "outfit-bold", fontSize: 16 }}
+          style={{ color: "white", fontFamily: "outfit-bold", fontSize: normalize(16) }}
         >
           ✦ Generate My Trip
         </Text>
       </TouchableOpacity>
+      </ScrollView>
+      
     </SafeAreaView>
   );
 }

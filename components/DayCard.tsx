@@ -2,6 +2,7 @@ import { View, Text, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getPlaceImageUtil } from "@/utils/Image";
+import { normalize } from "@/utils/Responsive";
 
 export default function DayCard({ day }: any) {
 
@@ -9,7 +10,7 @@ export default function DayCard({ day }: any) {
   useEffect(() => {
     getPlaceImage();
     
-    console.log("day card us");
+    // console.log("day card us");
 
     return()=>{}
   }, []);
@@ -33,7 +34,7 @@ export default function DayCard({ day }: any) {
       setImageUri(imgUri)
 
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return (
@@ -57,13 +58,13 @@ export default function DayCard({ day }: any) {
         />
       )}
 
-      <Text style={{ fontFamily: "outfit-medium", fontSize: 14, marginTop: 5 }}>
+      <Text style={{ fontFamily: "outfit-medium", fontSize: normalize(14), marginTop: 5 }}>
         {day.activity}
       </Text>
       <Text
         style={{
           fontFamily: "outfit-medium",
-          fontSize: 14,
+          fontSize: normalize(14),
           marginTop: 5,
           color: "#808080",
         }}
@@ -73,7 +74,7 @@ export default function DayCard({ day }: any) {
       <Text
         style={{
           fontFamily: "outfit-medium",
-          fontSize: 14,
+          fontSize: normalize(14),
           marginTop: 5,
           color: "#808080",
         }}
@@ -83,7 +84,7 @@ export default function DayCard({ day }: any) {
       <Text
         style={{
           fontFamily: "outfit-medium",
-          fontSize: 14,
+          fontSize: normalize(14),
           marginTop: 5,
           color: "#808080",
         }}

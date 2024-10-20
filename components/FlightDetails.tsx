@@ -1,12 +1,13 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import moment from 'moment'
+import { normalize } from '@/utils/Responsive'
 
 export default function FlightDetails({flight}:any) {
   return (
     <View style={{display:'flex', justifyContent:'space-evenly', marginTop:25}}>
         <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', alignItems:'baseline'}}>
-        <Text style={{fontFamily:'outfit-bold', fontSize:18}}> ✈️  Flights </Text>
+        <Text style={{fontFamily:'outfit-bold', fontSize:normalize(18)}}> ✈️  Flights </Text>
        
 
         </View>

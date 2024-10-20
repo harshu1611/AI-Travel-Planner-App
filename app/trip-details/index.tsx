@@ -8,11 +8,15 @@ import moment from "moment";
 import FlightDetails from "@/components/FlightDetails";
 import HotelDetails from "@/components/HotelDetails";
 import Itinerary from "@/components/Itinerary";
+import { normalize } from "@/utils/Responsive";
+import { getPlaceImageUtil } from "@/utils/Image";
 
 export default function index() {
   const { tripData } = useLocalSearchParams();
   const [trip, setTrip] = useState<any>();
   const [photo, setPhoto] = useState<any>(null);
+  const[imageUri,setImageUri]=useState<any>(null)
+
   // console.log((tripData + typeof(tripData)))
   useEffect(() => {
     if (typeof tripData === "string") {
@@ -20,20 +24,23 @@ export default function index() {
     }
    
       getPlaceImage();
-    console.log('us 3')
 
     return()=>{}
   }, []);
   const getPlaceImage = async () => {
     if (typeof tripData === "string") {
       try {
-        const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${
-          JSON.parse(tripData).trip.destination.split(",")[0]
-        }&key=${process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}`
-      );
-      console.log(response.data.results[0].photos[0].photo_reference);
-      setPhoto(response.data.results[0].photos[0].photo_reference);
+      //   const response = await axios.get(
+      //   `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${
+      //     JSON.parse(tripData).trip.destination.split(",")[0]
+      //   }&key=${process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}`
+      // );
+      // console.log(response.data.results[0].photos[0].photo_reference);
+      // setPhoto(response.data.results[0].photos[0].photo_reference);
+
+      const imgUri= await getPlaceImageUtil(JSON.parse(tripData).trip.destination.split(",")[0])
+      // console.log(imgUri)
+      setImageUri(imgUri)
       } catch (error) {
         setPhoto('random')
       }
@@ -49,11 +56,11 @@ export default function index() {
       >
         <Ionicons name="arrow-back" color={"black"} size={30} />
       </TouchableOpacity>
-      {photo ? 
+      {imageUri?
     <>
-    {photo &&  <Image
+    {imageUri &&  <Image
         source={{
-          uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo}&key=${process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}`,
+          uri: imageUri,
         }}
         style={{ width: "100%", height: 330 }}
       />}
@@ -69,15 +76,15 @@ export default function index() {
           }}
         >
           <View style={{ display: "flex", justifyContent: "space-evenly", gap:6 }}>
-            <Text style={{fontFamily:'outfit-bold', fontSize:20}}>{trip.trip.destination}</Text>
+            <Text style={{fontFamily:'outfit-bold', fontSize:normalize(20)}}>{trip.trip.destination}</Text>
             {/* <Text style={{fontFamily:'outfit', fontSize:16, color:'#808080'}}>{moment(trip.trip.date.split(' - ')[0]).format('DD MMM YYYY')} - {moment(trip.trip.date.split(' - ')[1]).format('DD MMM YYYY')}</Text> */}
-            <Text style={{fontFamily:'outfit', fontSize:16, color:'#808080'}}>🚌 {trip.trip.traveler}</Text>
-            <Text style={{fontFamily:'outfit', fontSize:16, color:'#808080'}}>💰 {trip.trip.budget}</Text>
+            <Text style={{fontFamily:'outfit', fontSize:normalize(16), color:'#808080'}}>🚌 {trip.trip.traveler}</Text>
+            <Text style={{fontFamily:'outfit', fontSize:normalize(16), color:'#808080'}}>💰 {trip.trip.budget}</Text>
           </View>
           
-          {photo && trip.trip.flight && <FlightDetails flight={trip.trip.flight}/>}
-          {photo && trip.trip.hotel && <HotelDetails hotel={trip.trip.hotel}/>}
-          {photo && trip.trip.itinerary && <Itinerary itinerary={trip.trip.itinerary}/>}
+          {imageUri && trip.trip.flight && <FlightDetails flight={trip.trip.flight}/>}
+          {imageUri && trip.trip.hotel && <HotelDetails hotel={trip.trip.hotel}/>}
+          {imageUri && trip.trip.itinerary && <Itinerary itinerary={trip.trip.itinerary}/>}
         </View>
       )}
     </>  

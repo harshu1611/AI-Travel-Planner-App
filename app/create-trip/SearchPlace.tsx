@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +14,7 @@ import { router } from "expo-router";
 import axios from "axios";
 import DropDownPicker from "react-native-dropdown-picker";
 import { CreateTripContext } from "@/context/CreateTripContext";
+import { normalize } from "@/utils/Responsive";
 
 export default function SearchPlace() {
   const [sourceSearchQuery, setSourceSearchQuery] = useState("");
@@ -55,7 +57,7 @@ export default function SearchPlace() {
       }, 1000);
     }
 
-    console.log(searchResults);
+    // console.log(searchResults);
   }, [sourceSearchQuery, destinationSearchQuery]);
 
   const tripContext = useContext(CreateTripContext);
@@ -69,9 +71,9 @@ export default function SearchPlace() {
         <Ionicons name="arrow-back" color={"black"} size={30} />
       </TouchableOpacity>
       <View style={{ display: "flex", flexDirection: "row", marginTop: 20 }}>
-        <Text style={{ fontFamily: "outfit-bold", fontSize: 32 }}>Select </Text>
+        <Text style={{ fontFamily: "outfit-bold", fontSize: normalize(32) }}>Select </Text>
         <Text
-          style={{ fontFamily: "outfit-bold", fontSize: 32, color: "#808080" }}
+          style={{ fontFamily: "outfit-bold", fontSize: normalize(32), color: "#808080" }}
         >
           Locations
         </Text>
@@ -125,7 +127,7 @@ export default function SearchPlace() {
           </ScrollView>
         </View>
       ) : null}
-<Text style={{fontFamily:'outfit', textAlign:'center',color: '#808080', marginVertical: 20, fontSize: 22}}>TO</Text>
+<Text style={{fontFamily:'outfit', textAlign:'center',color: '#808080', marginVertical: 20, fontSize: normalize(22)}}>TO</Text>
       <TextInput
         placeholder="Search Destination"
         style={{
@@ -188,11 +190,17 @@ export default function SearchPlace() {
           alignSelf: "center",
         }}
         onPress={() => {
-          router.push("/create-trip/SelectTraveller");
+          if(source==="" || destination===""){
+            Alert.alert("Please fill all details")
+          }
+          else{
+            router.push("/create-trip/SelectTraveller");
+
+          }
         }}
       >
         <Text
-          style={{ color: "white", fontFamily: "outfit-bold", fontSize: 16 }}
+          style={{ color: "white", fontFamily: "outfit-bold", fontSize: normalize(16) }}
         >
           Proceed
         </Text>

@@ -15,13 +15,14 @@ import { supabase } from "@/config/SupabaseConfig";
 
 import { decode } from 'base64-arraybuffer'
 import { getPlaceImageUtil } from "@/utils/Image";
+import { normalize } from "@/utils/Responsive";
 
 
 
 
 export default function UserTripList({ userTrips }: any) {
   useEffect(() => {
-    console.log("us1");
+    // console.log("us1");
 
     getPlaceImage();
 
@@ -50,7 +51,7 @@ export default function UserTripList({ userTrips }: any) {
 
     }
     catch (error) {
-      console.log(error);
+      // console.log(error);
       setPhoto("error");
     }
   };
@@ -84,7 +85,7 @@ export default function UserTripList({ userTrips }: any) {
               width: "100%",
             }}
           >
-            <Text style={{ fontFamily: "outfit", fontSize: 18 }}>
+            <Text style={{ fontFamily: "outfit", fontSize: normalize(18) }}>
               {userTrips[n - 1].tripResp.trip.destination}
             </Text>
             <View
@@ -98,14 +99,14 @@ export default function UserTripList({ userTrips }: any) {
               }}
             >
               <Text
-                style={{ fontFamily: "outfit", fontSize: 18, color: "#808080" }}
+                style={{ fontFamily: "outfit", fontSize:  normalize(18), color: "#808080" }}
               >
                 {moment(JSON.parse(userTrips[n - 1].tripData).startDate).format(
                   "DD MMM YYYY"
                 )}
               </Text>
               <Text
-                style={{ fontFamily: "outfit", fontSize: 18, color: "#808080" }}
+                style={{ fontFamily: "outfit", fontSize:  normalize(18), color: "#808080" }}
               >
                 🚌 {userTrips[n - 1].tripResp.trip.traveler}
               </Text>
@@ -136,7 +137,7 @@ export default function UserTripList({ userTrips }: any) {
               style={{
                 color: "white",
                 fontFamily: "outfit-bold",
-                fontSize: 16,
+                fontSize:  normalize(16),
               }}
             >
               See your plan

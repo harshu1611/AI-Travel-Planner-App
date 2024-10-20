@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Budget } from "@/constants/Traveller";
 import OptionCard from "@/components/OptionCard";
 import { CreateTripContext } from "@/context/CreateTripContext";
+import { normalize } from "@/utils/Responsive";
 
 export default function SelectBudget() {
   const [selected, setSelected] = useState<any>();
@@ -23,7 +24,7 @@ export default function SelectBudget() {
       <TouchableOpacity onPress={() => router.back()}>
         <Ionicons name="arrow-back" color={"black"} size={30} />
       </TouchableOpacity>
-      <Text style={{ fontFamily: "outfit-bold", fontSize: 36, marginTop: 25 }}>
+      <Text style={{ fontFamily: "outfit-bold", fontSize: normalize(36), marginTop: 25 }}>
         Budget
       </Text>
       <View>
@@ -50,12 +51,18 @@ export default function SelectBudget() {
             alignSelf: "center",
           }}
           onPress={() => {
-            router.push('/create-trip/ReviewTrip')
+            if(!selected){
+              Alert.alert("Please select budget type.")
+            }
+            else{
+              router.push('/create-trip/ReviewTrip')
+
+            }
             
           }}
         >
           <Text
-            style={{ color: "white", fontFamily: "outfit-bold", fontSize: 16 }}
+            style={{ color: "white", fontFamily: "outfit-bold", fontSize: normalize(16) }}
           >
             Next
           </Text>

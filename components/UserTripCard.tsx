@@ -4,6 +4,7 @@ import moment from "moment";
 import axios from "axios";
 import { router } from "expo-router";
 import { getPlaceImageUtil } from "@/utils/Image";
+import { normalize } from "@/utils/Responsive";
 
 export default function UserTripCard({ trip }: any) {
   // const tripdata= JSON.parse(trip.tripData)
@@ -18,7 +19,7 @@ export default function UserTripCard({ trip }: any) {
  
 
 
-    console.log("us2 shs")
+    // console.log("us2 shs")
     return ()=>{}
   }, []);
   const getPlaceImage = async () => {
@@ -78,7 +79,7 @@ export default function UserTripCard({ trip }: any) {
             <Text
               style={{
                 fontFamily: "outfit-bold",
-                fontSize: 14,
+                fontSize: normalize(14),
                 flexWrap: "wrap",
               }}
             >
@@ -87,7 +88,7 @@ export default function UserTripCard({ trip }: any) {
             <Text
               style={{
                 fontFamily: "outfit",
-                fontSize: 14,
+                fontSize: normalize(14),
                 flexWrap: "wrap",
                 color: "#808080",
               }}
@@ -97,7 +98,7 @@ export default function UserTripCard({ trip }: any) {
             <Text
               style={{
                 fontFamily: "outfit",
-                fontSize: 14,
+                fontSize: normalize(14),
                 flexWrap: "wrap",
                 color: "#808080",
               }}

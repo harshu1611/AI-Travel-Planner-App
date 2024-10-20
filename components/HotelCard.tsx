@@ -2,13 +2,14 @@ import { View, Text, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getPlaceImageUtil } from "@/utils/Image";
+import { normalize } from "@/utils/Responsive";
 
 export default function HotelCard({ hotel }: any) {
-  console.log(hotel);
+  // console.log(hotel);
   useEffect(() => {
     getPlaceImage();
 
-    console.log(" us4 hotel card");
+    // console.log(" us4 hotel card");
 
     return () => {};
   }, []);
@@ -27,7 +28,7 @@ export default function HotelCard({ hotel }: any) {
       // console.log(imgUri)
       setImageUri(imgUri);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setPhoto("error");
     }
   };
@@ -51,7 +52,7 @@ export default function HotelCard({ hotel }: any) {
         />
       )}
       <Text
-        style={{ fontFamily: "outfit-medium", fontSize: 16, flexWrap: "wrap" }}
+        style={{ fontFamily: "outfit-medium", fontSize: normalize(16), flexWrap: "wrap" }}
       >
         {hotel.name}
       </Text>
@@ -62,10 +63,10 @@ export default function HotelCard({ hotel }: any) {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontFamily: "outfit-medium", fontSize: 12 }}>
+        <Text style={{ fontFamily: "outfit-medium", fontSize: normalize(12) }}>
           ⭐ {hotel.rating}
         </Text>
-        <Text style={{ fontFamily: "outfit-medium", fontSize: 12 }}>
+        <Text style={{ fontFamily: "outfit-medium", fontSize: normalize(12) }}>
           💰 {hotel.price}
         </Text>
       </View>

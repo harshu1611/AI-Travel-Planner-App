@@ -11,6 +11,7 @@ import UserTripList from "@/components/UserTripList";
 import { getStorage,ref,getMetadata } from "firebase/storage";
 import { storageRef } from "@/config/FirebaseConfig";
 import { supabase } from "@/config/SupabaseConfig";
+import { normalize } from "@/utils/Responsive";
 export default function MyTrip() {
   const user = auth.currentUser;
 
@@ -32,7 +33,7 @@ export default function MyTrip() {
       
     });
     setLoading(false)
-    console.log(userTrips)
+    // console.log(userTrips)
   };
 
 
@@ -54,7 +55,7 @@ export default function MyTrip() {
           flexDirection: "row",
         }}
       >
-        <Text style={{ fontFamily: "outfit-bold", fontSize: 32 }}>
+        <Text style={{ fontFamily: "outfit-bold", fontSize: normalize(32) }}>
           My trips
         </Text>
         <TouchableOpacity onPress={()=>{

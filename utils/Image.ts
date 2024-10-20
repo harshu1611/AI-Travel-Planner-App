@@ -27,13 +27,13 @@ export const getPlaceImageUtil = async (name: any) => {
         sortBy: { column: "name", order: "asc" },
         search: name,
       });
-    console.log("dta", dta);
+    // console.log("dta", dta);
     if (dta?.length! > 0) {
       const { data } = supabase.storage
         .from("images")
         .getPublicUrl(`new/${dta![0].name}`);
 
-        console.log('public',data.publicUrl)
+        // console.log('public',data.publicUrl)
       return data.publicUrl;
     } else {
       const response = await axios.get(
@@ -53,11 +53,11 @@ export const getPlaceImageUtil = async (name: any) => {
         .upload(`new/${name}.png`, decode(base64), {
           contentType: "image/png",
         });
-      console.log("upload", data, error);
+      // console.log("upload", data, error);
 
       return google_uri
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

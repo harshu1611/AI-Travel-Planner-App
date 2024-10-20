@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,6 +6,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { router } from "expo-router";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "@firebase/auth";
 import { app } from "@/config/FirebaseConfig";
+import { normalize } from "@/utils/Responsive";
 
 
 
@@ -24,7 +25,7 @@ export default function index() {
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    console.log(user)
+    // console.log(user)
     if(user){
         router.replace('/MyTrip')
     }
@@ -32,8 +33,9 @@ export default function index() {
   })
   .catch((error) => {
     const errorCode = error.code;
+    Alert.alert("Incorrect Credentials or Not Registered")
     const errorMessage = error.message;
-    console.log(errorMessage)
+    // console.log(errorMessage)
     // ..
   });
   }
@@ -52,14 +54,14 @@ export default function index() {
         }}
       >
         <Text
-          style={{ fontFamily: "outfit-bold", fontSize: 36, marginTop: 10 }}
+          style={{ fontFamily: "outfit-bold", fontSize: normalize(36), marginTop: 10 }}
         >
           Let's Sign You In
         </Text>
         <Text
           style={{
             fontFamily: "outfit",
-            fontSize: 36,
+            fontSize: normalize(36),
             marginTop: 10,
             color: "#808080",
           }}
@@ -69,7 +71,7 @@ export default function index() {
         <Text
           style={{
             fontFamily: "outfit",
-            fontSize: 36,
+            fontSize: normalize(36),
             marginTop: 10,
             color: "#808080",
           }}
@@ -103,8 +105,7 @@ export default function index() {
           }}
         ></TextInput>
         <TextInput
-          placeholder="Enter Email"
-          keyboardType="email-address"
+          placeholder="Password"
           secureTextEntry={true}
           style={{
             padding: 15,
@@ -123,14 +124,13 @@ export default function index() {
       <TouchableOpacity style={{width:'100%', backgroundColor:'black', height:'auto', padding:18, borderRadius:28, justifyContent:'center', alignItems:'center', marginTop:30}} onPress={()=>{
          login()
         }}>
-            <Text style={{color:'white', fontFamily:'outfit-bold', fontSize:16}}>Login</Text>
+            <Text style={{color:'white', fontFamily:'outfit-bold', fontSize:normalize(16)}}>Login</Text>
         </TouchableOpacity>
-        <Text style={{color:'#808080', fontFamily:'outfit', textAlign:'center', marginTop:30, fontSize:20}}>OR</Text>
+        <Text style={{color:'#808080', fontFamily:'outfit', textAlign:'center', marginTop:30, fontSize:normalize(20)}}>OR</Text>
         <TouchableOpacity style={{display:'flex', flexDirection:'row',width:'100%', backgroundColor:'black', height:'auto', padding:18, borderRadius:28, justifyContent:'center', alignItems:'center', marginTop:30}} onPress={()=>{
            router.replace('/auth/sign-up')
         }}>
-            <AntDesign name="google" size={24} color="white" />
-            <Text style={{color:'white', fontFamily:'outfit-bold', fontSize:16, marginLeft:10}}>Sign Up</Text>
+            <Text style={{color:'white', fontFamily:'outfit-bold', fontSize:normalize(16), marginLeft:10}}>Sign Up</Text>
         </TouchableOpacity>
     </SafeAreaView>
   );
