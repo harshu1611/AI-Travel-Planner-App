@@ -1,3 +1,7 @@
+# Welcome to Trippify!- Your AI Travel planner
+
+[APK Link](https://drive.google.com/file/d/1bY6x3SS3WRonCbxGezjDv254ZrKYmxOt/view?usp=sharing) 
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
